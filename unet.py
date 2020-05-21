@@ -1,3 +1,8 @@
+'''
+Helena Van Hemmen, May 2020
+adapted from: https://github.com/pietz/unet-keras/blob/master/unet.py
+'''
+
 import numpy as np
 import tensorflow as tf
 from tf.keras.models import Input, Model
@@ -5,8 +10,6 @@ from tf.keras.layers import Conv2D, Conv2DTranspose, Concatenate, MaxPooling2D
 from tf.keras.layers import UpSampling2D, Dropout, BatchNormalization
 
 '''
-https://github.com/pietz/unet-keras/blob/master/unet.py
----
 U-Net: Convolutional Networks for Biomedical Image Segmentation
 (https://arxiv.org/abs/1505.04597)
 ---
