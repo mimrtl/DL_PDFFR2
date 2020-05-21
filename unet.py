@@ -54,7 +54,7 @@ def unet(img_shape, out_ch=1, start_ch=64, depth=4, inc_rate=2., activation='rel
 		 dropout=0.5, batchnorm=False, maxpool=True, upconv=True, residual=False):
 	i = Input(shape=img_shape)
 	o = level_block(i, start_ch, depth, inc_rate, activation, dropout, batchnorm, maxpool, upconv, residual)
-	o = Conv2D(out_ch, 1, activation='sigmoid')(o)
+	o = Conv2D(out_ch, 1, activation='linear')(o)
 	return Model(inputs=i, outputs=o)
 
 
