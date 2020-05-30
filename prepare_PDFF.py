@@ -6,7 +6,6 @@ import os
 import glob
 import numpy as np
 import scipy.io as spio
-import pandas as pd
 
 in_ch = 12
 out_ch = 3
