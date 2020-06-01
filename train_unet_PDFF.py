@@ -32,7 +32,7 @@ def get_unet(in_rows,in_col):
 
 def train():
     
-    weight_filename = 'weights_'+repr(in_ch)+'ch.h5'
+    weight_filename = 'weights.h5'
 
     print('Creating/compiling network...')
 
