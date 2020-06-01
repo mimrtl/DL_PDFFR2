@@ -7,7 +7,7 @@ import glob
 import numpy as np
 import scipy.io as spio
 
-in_ch = 12
+in_ch = 2
 out_ch = 3
 
 in_rows = 256
@@ -17,7 +17,7 @@ data_folder = '/data/data_mrcv2/MCMILLAN_GROUP/50_users/Helena'
 
 def prepare():
     
-    np.random.seed(813)
+    #np.random.seed(813)
 
     print('Loading images from' + data_folder + '...')
 
@@ -35,35 +35,23 @@ def prepare():
 
             in_slices = img_idata.shape[2]
 
-            input1_echo1 = np.zeros([in_rows,in_col,in_slices,1])
-            input2_echo1 = np.zeros([in_rows,in_col,in_slices,1])
-            output_fat = np.zeros([in_rows,in_col,in_slices,1])
-            output_water = np.zeros([in_rows,in_col,in_slices,1])
-            output_r2 = np.zeros([in_rows,in_col,in_slices,1])
+            input_echo1 = np.zeros([in_rows,in_col,in_slices,in_ch])
+            output = np.zeros([in_rows,in_col,in_slices,out_ch])
 
-            if input_count == 1
-                input1_echo1 = img_idata[:,:,:,1]
-                input2_echo1 = img_idata[:,:,:,2]
-                output_water = img_ref[:,:,:,1]
-                output_fat = img_ref[:,:,:,2]
-                output_r2 = img_ref[:,:,:,3]
+            if input_count == 1:
+                input_echo1 = img_idata[:,:,:,0:1]
+                output = img_ref[:,:,:,:]
             else:
-                input1_echo1 = np.concatenate((input1_echo1,img_idata[:,:,:,1]),axis=0)
-                input2_echo1 = np.concatenate((input1_echo2,img_idata[:,:,:,2]),axis=0)
-                output_water = np.concatenate((output_water,img_ref[:,:,:,1]),axis=0)
-                output_fat = np.concatenate((output_fat,img_ref[:,:,:,2]),axis=0)
-                output_r2 = np.concatenate((output_r2,img_ref[:,:,:,3]),axis=0)
+                input_echo1 = np.concatenate((input_echo1,img_idata[:,:,:,0:1]),axis=0)
+                output = np.concatenate((output,img_ref[:,:,:,0:2]),axis=0)
 
-            print('count = {}'.format(img_count))
+            print('count = {}'.format(input_count))
 
-            if input_count = 120
+            if input_count == 120:
                 break
 
-            np.save('input1_echo1.npy',input1_echo1)
-            np.save('input2_echo1.npy',input2_echo1)
-            np.save('output_water.npy',output_water)
-            np.save('output_fat.npy',output_fat)
-            np.save('output_r2.npy',output_r2)
+            np.save('input_echo1.npy',input_echo1)
+            np.save('output.npy',output)
 
         
         else:
