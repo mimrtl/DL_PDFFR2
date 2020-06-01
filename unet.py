@@ -1,6 +1,7 @@
 '''
 Helena Van Hemmen, May 2020
 adapted from: https://github.com/pietz/unet-keras/blob/master/unet.py
+uses linear activation for output
 '''
 
 import numpy as np
