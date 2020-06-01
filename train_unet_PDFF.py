@@ -81,8 +81,8 @@ def train():
     history = History()
     fig = plt.figure(figsize=(15,5))
     fig.show(False)
-    display_progress = LambdaCallback(on_epoch_end = lambda epoch, logs: progresscallback_img2img(epoch,logs,model,history,fig,in_echo1[150,:,:,:],out[150,:,:,:]))
-    model.fit_generator( datagen, steps_per_epoch=500, validation_data=datagen_val, validation_steps=250, epochs=n_epochs, callbacks=[model_checkpoint,tensorboard,history,display_progress] )
+    #display_progress = LambdaCallback(on_epoch_end = lambda epoch, logs: progresscallback_img2img(epoch,logs,model,history,fig,in_echo1[150,:,:,:],out[150,:,:,:]))
+    model.fit_generator( datagen, steps_per_epoch=500, validation_data=datagen_val, validation_steps=250, epochs=n_epochs, callbacks=[model_checkpoint,tensorboard,history] )
     
 
 def progresscallback_img2img(epoch,logs,model,history,fig,input_x,target_y):
