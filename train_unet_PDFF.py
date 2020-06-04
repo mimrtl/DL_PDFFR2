@@ -5,12 +5,13 @@ for PDFF and R2 quantification project
 import os
 import glob
 import numpy as np
-import tensorflow as tf
-from tf.keras.optimizer import Adam
-from tf.keras.losses import mean_absolute_error, mean_squared_error
-from tf.keras import backend as K
-from tf.keras.preprocessing.image import ImageDataGenerator
-from tf.keras.callbacks import ModelCheckpoint, TensorBoard, LambdaCallback, History
+import tensorflow
+from tensorflow import keras
+from keras.optimizers import Adam
+from keras.losses import mean_absolute_error, mean_squared_error
+from keras import backend as K
+from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import ModelCheckpoint, TensorBoard, LambdaCallback, History
 from time import time
 from matplotlib import pyplot as plt
 import unet
@@ -20,14 +21,15 @@ out_ch = 3
 
 in_rows = 256
 in_col = 256
-data_folder = '/data/data_mrcv2/MCMILLAN_GROUP/50_users/Helena'
+data_folder = '/Users/helenavanhemmen/Desktop/Folder/MIMRTL/DLforPDFFandR2_Data/Ideal_data1p5'
 
 batch_size = 16
 epochs = 200
 
 def get_unet(in_rows,in_col):
-    model = unet.unet((in_rows,in_col),out_ch=out_ch,start_ch=16,depth=3,inc_rate=2.,activation='relu',dropout=.5,batchnorm=False,maxpool=True,upconv=True,residual=False)
+    model = unet.unet((in_rows,in_col,in_ch),out_ch=out_ch,start_ch=16,depth=3,inc_rate=2.,activation='relu',dropout=.5,batchnorm=False,maxpool=True,upconv=True,residual=False)
     model.compile(optimizer=Adam(lr=1e-4),loss=mean_squared_error,metrics=[mean_squared_error,mean_absolute_error])
+    model.summary()
     return model
 
 def train():
@@ -42,7 +44,7 @@ def train():
     print('Loading data...')
 
     in_echo1 = np.load('input_echo1.npy')
-    out = np.load('output.py')
+    out = np.load('output.npy')
 
     datagen1 = ImageDataGenerator(
         rotation_range=15,
