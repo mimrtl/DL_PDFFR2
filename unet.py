@@ -5,10 +5,11 @@ uses linear activation for output
 '''
 
 import numpy as np
-import tensorflow as tf
-from tf.keras.models import Input, Model
-from tf.keras.layers import Conv2D, Conv2DTranspose, Concatenate, MaxPooling2D
-from tf.keras.layers import UpSampling2D, Dropout, BatchNormalization
+import tensorflow
+from tensorflow import keras
+from keras.models import Input, Model
+from keras.layers import Conv2D, Conv2DTranspose, Concatenate, MaxPooling2D
+from keras.layers import UpSampling2D, Dropout, BatchNormalization
 
 '''
 U-Net: Convolutional Networks for Biomedical Image Segmentation
