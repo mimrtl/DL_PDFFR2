@@ -12,14 +12,14 @@ out_ch = 3
 
 in_rows = 256
 in_col = 256
-data_folder = '/data/data_mrcv2/MCMILLAN_GROUP/50_users/Helena'
+data_folder = '/Users/helenavanhemmen/Desktop/Folder/MIMRTL/DLforPDFFandR2_Data/Ideal_data1p5'
 
 
 def prepare():
     
-    #np.random.seed(813)
+    np.random.seed(813)
 
-    print('Loading images from' + data_folder + '...')
+    print('Loading images from ' + data_folder + '...')
 
     input_count = 0
     for filename in os.listdir(data_folder):
@@ -27,7 +27,8 @@ def prepare():
         
             input_count += 1
 
-            curr_input = spio.loadmat(filename, struct_as_record = True)
+            print(filename)
+            curr_input = spio.loadmat(os.path.join(data_folder,filename), struct_as_record = True)
 
         
             img_idata = curr_input['img_idata']
@@ -38,12 +39,17 @@ def prepare():
             input_echo1 = np.zeros([in_rows,in_col,in_slices,in_ch])
             output = np.zeros([in_rows,in_col,in_slices,out_ch])
 
+            curr_in = img_idata[:,:,:,0:2]
+            print(curr_in.shape)
+            curr_out = img_ref[:,:,:,:]
+            print(curr_out.shape)
+
             if input_count == 1:
-                input_echo1 = img_idata[:,:,:,0:1]
-                output = img_ref[:,:,:,:]
+                input_echo1 = curr_in
+                output = curr_out
             else:
-                input_echo1 = np.concatenate((input_echo1,img_idata[:,:,:,0:1]),axis=0)
-                output = np.concatenate((output,img_ref[:,:,:,0:2]),axis=0)
+                input_echo1 = np.concatenate((input_echo1,curr_in),axis=2)
+                output = np.concatenate((output,curr_out),axis=2)
 
             print('count = {}'.format(input_count))
 
@@ -57,9 +63,7 @@ def prepare():
         else:
             continue
 
-
-
-
+prepare()
 
 
         
