@@ -26,7 +26,7 @@ data_folder = '/Users/helenavanhemmen/Desktop/Folder/MIMRTL/DLforPDFFandR2_Data/
 batch_size = 16
 epochs = 200
 
-def get_unet(in_rows,in_col):
+def get_unet(in_rows,in_col,in_ch):
     model = unet.unet((in_rows,in_col,in_ch),out_ch=out_ch,start_ch=16,depth=3,inc_rate=2.,activation='relu',dropout=.5,batchnorm=False,maxpool=True,upconv=True,residual=False)
     model.compile(optimizer=Adam(lr=1e-4),loss=mean_squared_error,metrics=[mean_squared_error,mean_absolute_error])
     model.summary()
@@ -38,7 +38,7 @@ def train():
 
     print('Creating/compiling network...')
 
-    model = get_unet(in_rows,in_col)
+    model = get_unet(in_rows,in_col,in_ch)
     model_checkpoint = ModelCheckpoint(weight_filename,monitor='loss',save_best_only=True)
 
     print('Loading data...')
