@@ -21,10 +21,10 @@ out_ch = 3
 
 in_rows = 256
 in_col = 256
-data_folder = '/Users/helenavanhemmen/Desktop/Folder/MIMRTL/DLforPDFFandR2_Data/Ideal_data1p5'
+data_folder = '/data/data_mrcv2/MCMILLAN_GROUP/50_users/Helena/Ideal_data1p5'
 
-batch_size = 16
-epochs = 200
+batch_size = 15
+epochs = 100
 
 def get_unet(in_rows,in_col,in_ch):
     model = unet.unet((in_rows,in_col,in_ch),out_ch=out_ch,start_ch=16,depth=3,inc_rate=2.,activation='relu',dropout=.5,batchnorm=False,maxpool=True,upconv=True,residual=False)
